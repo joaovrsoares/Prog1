@@ -1,0 +1,31 @@
+@model List<WebApplication1.Models.Flower>
+
+@{
+    ViewData["Title"] = "Lista de flores";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Cor</th>
+            <th>Pétalas</th>
+            <th>Tamanho (cm)</th>
+            <th>Perfumada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flower in Model)
+        {
+            <tr>
+                <td>@flower.Type</td>
+                <td>@flower.Color</td>
+                <td>@flower.Petals</td>
+                <td>@flower.Size</td>
+                <td>@(flower.IsFragrant ? "Sim" : "Não")</td>
+            </tr>
+        }
+    </tbody>
+</table>
