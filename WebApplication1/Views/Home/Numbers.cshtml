@@ -1,0 +1,9 @@
+﻿@model string
+	
+<h1>Numbers</h1>
+
+@for (int i = 1; i <= 2; i++)
+{
+	<h2>Impressão @i</h2>
+	<p>@Html.Raw(Model)</p>
+}

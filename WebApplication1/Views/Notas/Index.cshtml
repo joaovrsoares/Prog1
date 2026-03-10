@@ -1,0 +1,54 @@
+﻿@{
+    var notas = ViewBag.Notas as Dictionary<string, double>;
+    var aprovados = ViewBag.Aprovacoes as Dictionary<string, string>;
+
+    var mediaTurma = ViewBag.MediaTurma;
+    var maiorNota = ViewBag.MaiorNota;
+    var menorNota = ViewBag.MenorNota;
+}
+
+<h1>Notas da turma</h1>
+
+<h4>Estatísticas</h4>
+<table class="table table-striped">
+    <tr>
+        <td>Nota mínima</td>
+        <td>@menorNota</td>
+    </tr>
+    <tr>
+        <td>Nota máxima</td>
+        <td>@maiorNota</td>
+    </tr>
+    <tr>
+        <td>Nota média</td>
+        <td>@mediaTurma</td>
+    </tr>
+</table>
+
+<h4>Alunos - Aprovados/Reprovados</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Aluno</th>
+            <th>Nota</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (notas != null && aprovados != null)
+        {
+            @foreach (var aluno in notas.OrderByDescending(n => n.Value))
+            {
+                var status = aprovados[aluno.Key];
+                var corClasse = status == "Aprovado" ? "table-success" :
+                status == "Em recuperação" ? "table-warning" :
+                "table-danger";
+                <tr class="@corClasse">
+                    <td>@aluno.Key</td>
+                    <td>@aluno.Value</td>
+                    <td>@status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
