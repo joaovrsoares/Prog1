@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<Imobiliaria.Entidades.Imovel>
+
+<div class="text-center">
+    <h1 class="display-4">Imobiliária</h1>
+    <br />
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Endereço</th>
+            <th>Preço</th>
+            <th>Tipo de Negócio</th>
+            <th>Tipo de Imóvel</th>
+        </tr>
+        @foreach (var imovel in Model)
+        {
+            <tr>
+                <td>@imovel.Id</td>
+                <td>@imovel.Endereco</td>
+                <td>@imovel.Preco.ToString("C")</td>
+                <td>@imovel.TipoNegocio</td>
+                <td>
+                    @{
+                        string detalhes = "";
+                        if (imovel is Imobiliaria.Entidades.Casa casa)
+                        {
+                            detalhes = $", {(casa.TemQuintal ? "com quintal" : "sem quintal")}, {casa.NumeroAndares} andares";
+                        }
+                        else if (imovel is Imobiliaria.Entidades.Apartamento apartamento)
+                        {
+                            detalhes = $", no {apartamento.Andar}º andar, {(apartamento.TemElevador ? "com elevador" : "sem elevador")}";
+                        }
+                    }
+                    @imovel.GetType().Name@detalhes
+                </td>
+            </tr>
+		}
+    </table>
+</div>

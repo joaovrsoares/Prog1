@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Imobiliaria.Entidades/Imobiliaria.Entidades.csproj" />
+  <Project Path="Imobiliaria/Imobiliaria.csproj" />
+</Solution>
